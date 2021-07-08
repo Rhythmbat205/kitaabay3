@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="card is-centered">
+  <div class="card-content">
+    <div class="content is-centered">
+ 
+
+
+<form>
+<div class="control is-centered is-right">
+<input class="input is-focused is-medium is-centered" name="q" type="text" placeholder="Search Jobs By Keywords..." value="{{ request.GET.q }}">
+<!--<input class="input is-large" name="q" type="text" placeholder="Search Jobs By Keywords..." value="{{ request.GET.q }}">-->
+</div>
+<div class="control is-centered">
+<br><button type="submit" class="button is-success is-centered">Search</button>
+</div>
+</form>
+</div>
+
+</div>
+</div>
+ <div class="columns is-mobile">
+  <div class="column is-offset-one-fifth">
+
+    
+</div>
+</div>
+
+
+{% for j in jobs %}
+
+<div class="card">
+    <figure class="image">
+    <header class="card-header">
+      <a href="{{ j.get_absolute_url }}">
+      <p class="card-header-title title is-3">
+        {{ j.company_name  }}
+      </p>
+    </a>
+      
+        
+      
+    </header>
+    <div class="card-content">
+      <div class="content">
+        <h4>{{ j.job_title }}</h4>
+            <ul type = "square">
+            <li>{{ j.job_type }}</li>
+            <li>{{ j.short_description }}</li>
+            <li>{{ j.creative_skills }}</li>
+            <!--<li>{{ j.softwares }}</li>
+            <li>{{ j.onsite }}</li>
+            <li>{{ j.country }} {{ j.city }}</li>-->
+    <br>
+
+    
+
+      </div>
+    </div>
+  
+    <footer class="card-footer">
+      <a href="{{j.url}}" class="card-footer-item">Link to Apply</a>
+      <a href="#" class="card-footer-item">Edit</a>
+      
+    </footer>
+</figure>
+  </div>
+<br>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<body class="imge" style="background-image: url('{% static "img/book7.jpg"%}'); height:1400px">
+<div class="img">
+  <!-- <center> -->
+  <div class="text">
+    <h2>Book Details</h2><br>
+    <form method="post" action="" enctype="multipart/form-data" role="form">
+      {% csrf_token %}
+    <div>
+      <label class="label is-medium">Enter the title</label>
+              {{ form.title }}  <br>
+    </div>
+    <div>
+      <label class="label is-medium">Upload Images(jpg/jpeg/png)</label>
+      {{ form.content }}<br><br>
+
+      <h5 style="padding-left:20px;font-size:18px;padding-right:20px"><b>Every book post must consist of the following images: </b></h5>
+      <ul style="list-style-type: square; text-align:left; padding-left:80px; font-size:13px">
+        
+        <li>Front Cover Page</li>
+        <li>Back Cover Page</li>
+        <li>All Pages of Index</li>
+        <li>A page from middle of the book</li>
+      </ul><br>
+
+    </div>
+    <div>
+      <label class="label is-medium">Description of the Product</label>
+                {{ form.caption }}<br>
+    </div>
+    <div>
+      <label class="label is-medium">Category</label>
+      {{ form.category }}<br>
+    </div>
+    <div>
+      <label class="label is-medium">Price:</label>
+              {{ form.cost }}<br>
+    </div>
+    <div>
+      <label class="label is-medium">State</label>
+              {{ form.state }}<br>
+    </div>
+    <div>
+      <label class="label is-medium">City</label>
+      {{ form.city }}<br>
+    </div>
+    <div>
+      <label class="label is-medium">Address</label>
+          {{ form.address }}<br>
+    </div>
+    <div>
+      <label class="label is-medium">If required, Are you ready to parcel the product?</label>
+          {{ form.parcel }}<br>
+    </div><br>
+
+    <div class="field">
+      <p class="control">
+        <button type="submit" name="action" class="button is-success">
+          ADD POST
+        </button>
+      </p>
+    </div>
+    </form>
+  </div>
+  <!-- </center> -->
+</div>
+
+
+
+</body>
+
+{% endblock %}
+
+
+
+
+
+
+<!-- #########################################3 Old Code ####################################################33333-->
+<!--<div class="columns is-mobile has-text-centered">
+  <div class="column is-half is-offset-one-quarter">
+
+    <div class="card">
+    <div class="card-content">
+
+    <form method="post" action="" enctype="multipart/form-data" role="form">
+    {% csrf_token %}
+    <h3 class="title is-1">New Post</h3>
+
+            <div class="field">
+              <p class="control has-icons-left">
+              <label class="label is-medium">Choose your files(Images(jpg/jpeg/png)/Videos(mp4))</label>
+                {{ form.content }}
+                <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </p>
+          </div>
+
+        
+          <div class="field">
+            <p class="control has-icons-left is-small">
+            <label class="label is-medium">Enter the title</label>
+              {{ form.title }}
+              <span class="icon is-small is-left">
+          <i class="fas fa-lock"></i>
+        </span>
+      </p>
+        </div>
+
+            <div class="field">
+              <p class="control has-icons-left">
+              <label class="label is-medium">Description of the Product</label>
+                {{ form.caption }}
+                <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </p>
+          </div>
+        
+         
+        <div class="field">
+          <p class="control has-icons-left is-small">
+          <label class="label is-medium">How would you categorize this project!!</label>
+            {{ form.category }}
+            <span class="icon is-small is-left">
+        <i class="fas fa-lock"></i>
+      </span>
+    </p>
+      </div>
+        
+          <div class="field">
+            <p class="control has-icons-left">
+            <label class="label is-medium">Total Cost</label>
+              {{ form.cost }}
+              <span class="icon is-small is-left">
+          <i class="fas fa-lock"></i>
+        </span>
+      </p>
+        </div>
+          <div class="field">
+            <p class="control has-icons-left">
+            <label class="label is-medium">State</label>
+              {{ form.state }}
+              <span class="icon is-small is-left">
+          <i class="fas fa-lock"></i>
+        </span>
+      </p>
+        </div>
+        <div class="field">
+          <p class="control has-icons-left">
+          <label class="label is-medium">City</label>
+            {{ form.city }}
+            <span class="icon is-small is-left">
+        <i class="fas fa-lock"></i>
+      </span>
+    </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left">
+        <label class="label is-medium">Address</label>
+          {{ form.address }}
+          <span class="icon is-small is-left">
+      <i class="fas fa-lock"></i>
+    </span>
+  </p>
+    </div>-->
+
+          
+          <!--<input type="hidden" name="country" id="countryId" value="IN"/>
+<select name="state" class="states order-alpha" id="stateId">
+    <option value={{ form.state }} > Select State</option>
+</select>
+<select name="city" class="cities order-alpha" id="cityId">
+    <option value="">Select City</option>
+</select>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+<script src="//geodata.solutions/includes/statecity.js"></script>-->
+
+      <!--<div class="field">
+      <p class="control">
+        <button type="submit" name="action" class="button is-success">
+          Create
+        </button>
+      </p>
+    </div>
+
+
+      </div>
+</div>-->
+
+
+
+
+
+
+

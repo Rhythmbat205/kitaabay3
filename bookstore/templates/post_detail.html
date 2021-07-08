@@ -1,0 +1,318 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style>
+<body class="w3-light-grey">
+  
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+  
+    <!-- Left Column -->
+    <div class="w3-third">
+    
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-display-container">
+          <div class="w3-display-bottomleft w3-container w3-text-black">
+          </div>
+        </div>
+        <br>
+        <br>
+        <div>
+          {% if user.is_authenticated and user == post.user %}
+          <h3>If your book is sold Click Below!!</h3>
+        <a href="{% url 'editpost' post.id %}" class="button">Click here</a>
+        {% endif %}
+          </div>
+        <h3 class="subtitle is-3">{{ post.title }}</h3>
+          <br>
+        <div class="w3-container">
+          <div class="media-content">
+
+            <div class="content">
+              {% if post.user.profile.first_name %}
+            <p class="title is-4"><a href="{% url 'profile' post.user %}">{{ post.user.profile.first_name }} {{ post.user.profile.last_name }}</a></p>
+            <p class="subtitle is-6">@{{ post.user.username }}</p>
+            {% else %}
+            <p class="subtitle is-3"><a href="{% url 'profile' post.user %}">@{{ post.user.username }}</a></p>
+          {% endif %}
+  
+            </div>
+            </div>
+            {% if not post.parcel %}
+            <h2 style="font-weight: bold;" class="title is-5">Note : This seller is not interested in sending books through parcel.</h2>
+            {% else %}
+            <h2 style="font-weight: bold;" class="title is-5">Note : This Seller is comfortable in sending the books through parcel.</h2>
+            {% endif %}
+      <h2 style="font-weight: bold;" class="title is-5">Price - {{ post.cost }}</h2>
+      <h2 style="font-weight: bold;" class="title is-5">State - {{ post.state }}</h2>
+      <h2 style="font-weight: bold;" class="title is-5">City - {{ post.city }}</h2>
+      <h2 style="font-weight: bold;" class="title is-5">Address - {{ post.address }}</h2>
+      <a href="{% url 'category' post.category %}"><h2 style="font-weight: bold;" class="title is-5">Category -</h2><p>{{ post.category }}</p></a>
+      <hr>
+          <!--<h1 style="font-weight: bold;" class="title is-1">{{ user.location }}</h1>
+          <h1 style="font-weight: bold;" class="title is-1">{{ profile.location }}</h1>-->
+          <p class="w3-large w3-text-theme"><b><i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>Book Description</b></p>
+          <p>{{ post.caption }}</p>
+          <hr>
+          <strong><small>Posted on - {{ post.posted }}</small></strong>
+          <br>
+          <br>
+        </div>
+      </div><br>
+
+    <!-- End Left Column -->
+    </div>
+    {% if user.is_authenticated and user != post.user %}
+    <div class="box">
+    <nav class="level is-mobile">
+      <div class="level-item has-text-centered">
+        <div>
+          
+          <a href="{% url 'newconversation' post.user.username %}" class="button is-info">Send a message!</a>
+          
+        </div>
+      </div>
+      
+      <div class="level-item has-text-centered">
+        {% if favorited is True %}
+        <div>
+          <a href="{% url 'postfavorite' post.id %}"><i class="material-icons has-text-danger">save_alt</i></a>
+          <p>Remove Post</p> 
+        </div>
+
+        
+
+      {% else %}
+        <div>
+          <a href="{% url 'postfavorite' post.id %}"><i class="material-icons has-text-success">save_alt</i></a>
+      <p>Add to Cart</p> 
+        </div>
+    
+      {% endif %}
+    </div>
+    
+      
+
+    </nav>
+
+  </div>
+  {% endif %}
+    <!-- Right Column -->
+    <div class="w3-twothird">
+    
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+        <!--<div class="w3-container">-->
+          
+          {% for cont in post.content.all %}
+<div class="column is-one-half">
+    <div class="box">
+      {% if cont.file.name|slice:"-3:" == 'jpg' or cont.file.name|slice:"-3:" == 'png' or cont.file.name|slice:"-4:" == 'jpeg' %}
+        
+      <figure class="">
+          <a href="{{ cont.get_absolute_url }}">
+            
+            <img id="myimage" src="{{ cont.file.url }}" alt="Placeholder image">
+              
+              
+              
+            </a>
+
+            <br>
+        </figure>
+        
+        
+      {% elif cont.file.name|slice:"-3:" == 'mp4' or cont.file.name|slice:"-3:" == 'gif' %}
+        <a href="{{ cont.get_absolute_url }}">
+          <video width="1280" controls="controls" preload="metadata">
+            <source src="{{ cont.file.url }}#t=0.5" type="video/mp4">        
+          </video>      
+        </a>
+      {% endif %}
+    <br>
+  
+    </div>
+  </div>
+    
+   
+    {% endfor %}
+          
+        </div>
+      </div>
+
+    
+
+    <!-- End Right Column -->
+    </div>
+    
+  <!-- End Grid -->
+  </div>
+  
+  <!-- End Page Container -->
+</div>
+
+<!--<footer class="w3-container w3-teal w3-center w3-margin-top">
+  <p>Find me on social media.</p>
+  <i class="fa fa-facebook-official w3-hover-opacity"></i>
+  <i class="fa fa-instagram w3-hover-opacity"></i>
+  <i class="fa fa-snapchat w3-hover-opacity"></i>
+  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+  <i class="fa fa-twitter w3-hover-opacity"></i>
+  <i class="fa fa-linkedin w3-hover-opacity"></i>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>-->
+
+</body>
+</html>
+
+{% endblock %}
+
+
+<!--###################################################  oLD Code 1##########################################################################33
+-->
+
+
+  <!--<div class="columns is-mobile is-centered">
+  <div class="column is-half">
+
+
+  <div class="card">
+  <div class="card-image is-mobile">
+
+    
+     
+    {% for cont in post.content.all %}
+   Full-width images with number and caption text 
+      
+        {% if cont.file.name|slice:"-3:" == 'jpg' or cont.file.name|slice:"-3:" == 'png' or cont.file.name|slice:"-4:" == 'jpeg' %}
+        
+        <figure class="">
+            <a href="{{ cont.get_absolute_url }}">
+              
+              <img id="myimage" src="{{ cont.file.url }}" alt="Placeholder image">
+                
+                
+                
+              </a>
+
+              <br>
+          </figure>
+          
+          
+        {% elif cont.file.name|slice:"-3:" == 'mp4' or cont.file.name|slice:"-3:" == 'gif' %}
+          <a href="{{ cont.get_absolute_url }}">
+            <video width="1280" controls="controls" preload="metadata">
+              <source src="{{ cont.file.url }}#t=0.5" type="video/mp4">        
+            </video>      
+          </a>
+        {% endif %}
+      <br>
+    {% endfor %}
+
+  {{ form.state }}
+  
+
+  </div>
+  <div class="card-content">
+    <div class="media">
+
+      <div class="media-left">
+        <figure class="image is-48x48">
+          {% if post.user.profile.picture %}
+            <img src="{{ post.user.profile.picture.url }}" alt="Placeholder image">
+          {% else %}
+            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+          {% endif %}
+        </figure>
+      </div>
+
+      <div class="media-content">
+        {% if post.user.profile.first_name %}
+          <p class="title is-4"><a href="{% url 'profile' post.user %}">{{ post.user.profile.first_name }} {{ post.user.profile.last_name }}</a></p>
+        {% else %}
+          <p class="title is-4">Unknown</p>
+        {% endif %}
+        <p class="subtitle is-6">@{{ post.user.username }}</p>
+
+      <h2 style="font-weight: bold;" class="sub-title is-1">{{ post.title }}</h2>
+      <br>
+      <h2 style="font-weight: bold;" class="title is-1">{{ post.caption }}</h2>
+      <br>
+      <h3>Cost</h3>
+      <h2 style="font-weight: bold;" class="title is-1">{{ post.cost }}</h2>
+      <br>
+      <h3>State</h3>
+      <h2 style="font-weight: bold;" class="title is-1">{{ post.state }}</h2>
+      <br>
+      <h3>City</h3>
+      <h2 style="font-weight: bold;" class="title is-1">{{ post.city }}</h2>
+      <br>
+      <h3>Address</h3>
+      <h2 style="font-weight: bold;" class="title is-1">{{ post.address }}</h2>
+
+
+      <h3>Category</h3>
+      <a href="{% url 'category' post.category %}"><p>{{ post.category }}</p></a>
+
+        
+      
+      <strong><small>{{ post.posted }}</small></strong>
+      
+      
+      </div>
+      {% if user.is_authenticated and user != post.user %}
+      <a href="{% url 'newconversation' post.user.username %}" class="button is-info">Send a message!</a>
+    {% if favorited is True %}
+    <div class="media-right">
+      <a href="{% url 'postfavorite' post.id %}"><i class="material-icons has-text-danger">save_alt</i></a>
+      <p>Remove Post</p> 
+    </div>
+    {% else %}
+
+    <div class="media-right">
+      <a href="{% url 'postfavorite' post.id %}"><i class="material-icons has-text-success">save_alt</i></a>
+      <p>Add to Cart</p> 
+    </div>
+    {% endif %}
+  
+    {% endif %}-->
+    <!--<div class="media-right">
+      {% if status is True  %}
+      <a href="{% url 'postlike' post.id %}"><i class="material-icons has-text-danger">favorite</i></a>
+      {% else %}
+      <a href="{% url 'postlike' post.id %}"><i class="material-icons has-text-success">favorite</i></a>
+      {% endif %}
+      {% if like_status is True %}
+      <h5>Unlike</h5>
+      {% else %}
+      <h5>Like</h5>
+      {% endif %}
+      <p>{{ post.likes }} Likes</p>  
+    </div>-->
+    
+
+<!--    </div>
+
+  </div>
+</div>
+
+
+
+
+</div>
+</div>-->

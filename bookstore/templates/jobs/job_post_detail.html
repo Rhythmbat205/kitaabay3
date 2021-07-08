@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<div class="card">
+    <div class="card-content">
+      <div class="content">
+        
+            <h1 class="is-centered">{{ jobpost.company_name }}</h1>
+            <h2>Role : {{ jobpost.job_title }}</h2>
+            <ul type = "square">
+            <li>Job Type : {{ jobpost.job_type }}</li>  
+            <li>Skills Required : {{ jobpost.creative_skills }}</li>
+            <br>
+            <h4>Description : </h4>
+            <li>{{ jobpost.full_description }}</li>
+            <li>Softwares Required : {{ jobpost.softwares }}</li>
+            <li>{{ jobpost.onsite }}</li>
+            <li>Locations : {{ jobpost.country }} {{ jobpost.city }}</li>
+            <br>
+            <a href="{{ jobpost.url }}">
+            <div class="control">
+              <button class="button is-link">Apply Here</button>
+            </div></a>
+           <br>
+            <li>Posted On : {{ jobpost.posted }}</li>
+            
+            
+         </ul>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+{% endblock %}

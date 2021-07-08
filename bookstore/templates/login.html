@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  	<link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	{% comment %} <link rel="stylesheet" type="text/css" href="{% static 'css/hotel.css' %}"> {% endcomment %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+	
+	<title>Login to Bookstore</title>
+</head>
+
+<body class="imge" style="background-image: url('{% static "img/book5.jpg"%}')";>
+	<div class="img">
+		<!-- <center> -->
+		<div class="text">
+			
+			<form method="post" action="" role="form">
+        	{% csrf_token %}
+        <h3 class="title is-3">Login</h3><br>
+			<div>
+				<label class="label is-medium">Username</label>
+				{{ form.username }}<br><br>
+			</div>
+			<div>
+				<label class="label is-medium">Password</label>
+				{{ form.password }}<br><br>
+			</div>
+      {% if form.errors %}
+      <div class="row">
+        <div class="col s12">
+          <span style="color: red; font-weight: bold;">Your username or password did not match.</span>
+        </div>
+      </div>
+      {% endif %}
+      <div class="field">
+        <p class="control">
+          <button type="submit" value="login" class="button is-success">
+            <h3 class="label is-medium" style="color: azure;">Login</h3>
+          </button><br><br>
+        </p>
+      </div>
+      <input type="hidden" name="next" value="{{ next }}">
+			<div><h3 class="label is-medium">Don't have an account? <a href="{% url 'signup' %}">Register</a></h3>
+			</div>
+			</form>
+		</div>
+		<!-- </center> -->
+	</div>
+
+</body>
+</html>
+
+
+
+
+
+

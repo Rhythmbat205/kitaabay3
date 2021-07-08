@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card">
+  <footer class="card-footer">
+    <a href="{% url 'jobpost' %}" class="card-footer-item"> <i style="color: green;" class="material-icons">perm_media</i>Write a Job Post</a>
+    <a href="{% url 'jobsearch' %}" class="card-footer-item">Search Jobs</a>
+ 
+  </footer>
+</div>
+
+<br>
+<br>
+
+<!--<a href="{% url 'jobpost' %}">
+  <i style="color: green;" class="material-icons">perm_media</i>
+  <strong>New Post</strong>
+</a>
+<a href="{% url 'jobsearch' %}" class="button is-success">Find Users</a>-->
+{% for j in post_items %}
+
+<div class="card">
+    <figure class="image">
+    <header class="card-header">
+      <a href="{{ j.get_absolute_url }}">
+      <p class="card-header-title title is-3">
+        {{ j.company_name  }}
+      </p>
+    </a>
+      
+        
+      </button>
+    </header>
+    <div class="card-content">
+      <div class="content">
+        <h4>{{ j.job_title }}</h4>
+            <ul type = "square">
+            <li>{{ j.job_type }}</li>
+            <li>{{ j.short_description }}</li>
+            <li>{{ j.creative_skills }}</li>
+            <!--<li>{{ j.softwares }}</li>
+            <li>{{ j.onsite }}</li>
+            <li>{{ j.country }} {{ j.city }}</li>-->
+    <br>
+
+    
+
+      </div>
+    </div>
+  
+    <footer class="card-footer">
+      <a href="{{j.url}}" class="card-footer-item">Link to Apply</a>
+      <a href="#" class="card-footer-item">Edit</a>
+      
+    </footer>
+</figure>
+  </div>
+<br>
+{% endfor %}
+
+{% endblock %}

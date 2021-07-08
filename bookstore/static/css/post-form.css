@@ -1,0 +1,40 @@
+.img{
+	/*background-image: url(static/img/book_4.jpg);*/
+	min-height: 2000px;
+	/*height: 100%;*/
+	/*width: 100%;*/
+	background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    opacity: 0;
+}
+.text{
+	position: absolute;
+	background-color: white;
+	width: 30%;
+	top: 20%;
+	left: 35%;
+	text-align: center;
+	letter-spacing: 2px;
+	padding-top: 10px;
+	padding-bottom: 15px;
+	border: 3px solid black;
+	border-radius: 8px;
+}
+.input{
+	right: 0px;
+	border-radius: 5px;
+	padding: 5px;
+	margin-left: 30px;
+	width: 80%;
+	display: block;
+}
+.btn{
+	background-color: black;
+	color: white;
+	padding: 5px;
+	width: 350px;
+	cursor: pointer;
+	border-radius: 5px;
+}

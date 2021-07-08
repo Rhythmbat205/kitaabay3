@@ -1,0 +1,260 @@
+{% load static %}
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/hotel.css' %}">
+    {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'css/inbox.css' %}"> {% endcomment %}
+    <title>KitaaBay</title>
+    <style>
+      body a {
+        text-decoration: none;
+      }
+    </style>
+    <link rel="icon" href="{% static 'img/kitaabay-logo.jpg' %}" width="150" height="150">
+  </head>
+  <body>
+  	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="border-bottom: 1px solid;">
+	  
+	    <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/kitaabay2.jpg' %}" width="110" height="110"></a>
+	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="navbar-toggler-icon"></span>
+	    </button>
+	    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+	        
+	        <li>
+            <a href="{% url 'home' %}" class="navbar-item" style="color: rgb(149, 199, 199);">
+              Home
+            </a>
+          </li>
+
+          {% if cat_menu %}
+          <li class="nav-item dropdown">
+	          <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	            Categories
+	          </a>
+	          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% for item in cat_menu %}
+	              <li><a class="dropdown-item" href="{% url 'category' item %}">{{ item }}</a></li>
+              {% endfor %}
+	          </ul>
+	        </li>
+          {% endif %}
+          {% if user.is_authenticated %}
+          <li>
+            <a href="{% url 'profile' request.user %}" class="navbar-item" style="color: rgb(149, 199, 199);">
+              
+              Profile - <strong>{{ request.user }}</strong>
+            </a>
+          </li>
+          {% else %}
+          <li>
+          <a href="{% url 'login' %}" class="navbar-item" style="color: rgb(149, 199, 199);">
+            <strong>Login/Sign Up</strong></a>
+          </li>
+          {% endif %}
+          <li>
+            <a href="{% url 'newpost' %}" class="navbar-item" style="color: rgb(149, 199, 199);">
+              <strong>Sell Books</strong>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'inbox' %}" class="navbar-item"  style="color: rgb(149, 199, 199);">
+              Inbox
+              {% if directs_count %}
+              <span class="badge">{{ directs_count }}</span>
+              {% endif %}
+            </a>
+  
+            
+          </li>
+          <div class="navbar-item has-dropdown is-hoverable" style="color: rgb(149, 199, 199);">
+            <a class="navbar-link" style="color: rgb(149, 199, 199);">
+              Settings
+            </a>
+            <div class="navbar-dropdown">
+            <a href="{% url 'logout' %}" class="navbar-item" style="color:black">
+              
+              Log out
+            </a>
+          </div>
+        </div>
+        <!--<li>
+          {% if user.is_authenticated and user == profile.user %}
+        <li class="{% if url_name == 'profilefavorites' %}is-active{% endif %} navbar-item">
+      <a href="{% url 'profilefavorites' profile.user %}"><i class="material-icons">shopping_cart</i>
+    </li>
+    {% endif %}
+        </li>-->
+
+        
+	      </u>
+        <a href="{% url 'explorebooks' %}" class="button is-primary navbar-item">Search Books</a>
+	    </div>
+	  </div>
+	</nav>
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--###################################################33     Old HTML #3##########################################################################-->
+<!--<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Art Arena</title>
+    <link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+      <link rel="icon" href="{% static 'img/A.jpg' %}" width="150" height="150">
+  </head>
+  
+  <body>
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="">
+      <img src="{% static 'img/Bechdo.JPG' %}" width="150" height="150">
+    </a>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a href="" class="navbar-item">
+        <i class="material-icons">home</i>
+        Home
+      </a>
+
+      <a href="{% url 'home' %}" class="navbar-item">
+        <i class="material-icons">explore</i>
+        Explore
+      </a>-->
+
+      <!--<a href="{% url 'show-notifications' %}" class="navbar-item">
+        <i class="material-icons">notifications</i>
+        Notifications
+        {% if count_notifications %}
+          <span class="badge">{{ count_notifications }}</span>
+        {% endif %}
+      </a>-->
+
+      <!--<a href="" class="navbar-item">
+        <i class="material-icons">inbox</i>
+        Inbox
+        {% if directs_count %}
+        <span class="badge">{{ directs_count }}</span>
+        {% endif %}
+      </a>
+
+      <a href="" class="navbar-item">
+        <i class="material-icons"></i>
+        Market
+      </a>
+      <a href="" class="navbar-item">
+        <i class="material-icons"></i>
+        Jobs
+      </a>-->
+
+      <!--<a href="{% url 'profile' request.user %}" class="navbar-item">
+        <i class="material-icons">face</i>
+        Profile - <strong>{{ request.user }}</strong>
+      </a>
+
+        <a href="{% url 'newpost' %}" class="navbar-item">
+          <i style="color: green;" class="material-icons">perm_media</i>
+          <strong>New Post</strong>
+        </a>-->
+
+        <!--<a href="" class="navbar-item">
+          <i style="color: green;" class="material-icons">photo_filter</i>
+          <strong>New Story</strong>
+        </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Settings
+        </a>
+
+        <div class="navbar-dropdown">
+          <a href='{% url "change_password" %}'  class="navbar-item">
+            Change password
+          </a>
+          <a class="navbar-item">
+            Contact
+          </a>
+        
+            <a href="{% url 'aboutus' %}" class="navbar-item">
+            About Us!
+          </a>
+          <hr class="navbar-divider"
+          <a href="{% url 'logout' %}" class="navbar-item">
+            <a href="{% url 'home' %}" class="navbar-item">
+            Log out
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>-->
+
+      {% block banner %}
+      {% endblock %}
+
+  <!--<section class="section">-->
+    
+
+      {% block content %}
+      {% endblock %}
+
+
+      {% block pagination %}
+      {% endblock %}
+
+   
+  <!--</section>-->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="{% static 'js/init.js' %}"></script>
+  <script src="{% static 'js/slider.js' %}"></script>
+  </body>
+
+</html>

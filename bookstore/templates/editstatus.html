@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<body class="imge" style="background-image: url('{% static "img/book7.jpg"%}')";>
+	<div class="img">
+		<!-- <center> -->
+		<div class="text">
+			
+			<form method="post" enctype="multipart/form-data" action="" role="form">
+        {% csrf_token %}
+        <h3 class="title is-3" style="letter-spacing:0px">Book Status and Feedback</h3><br>
+			<div>
+				<h3 style="letter-spacing:-1px">If your product is sold 
+                    check here!!</h3>
+                    
+                  <p style="letter-spacing:-1px">(Note : If you check the box, Your book/books will move to the sold section)</p>
+                  {{ form.status }}<br><br>
+			</div>
+            <div>
+                <h3 style="letter-spacing:-1px">How was your experience
+                    with us?</h3>
+                    {{ form.feedback }}<br><br>
+                </h2>
+            </div>
+            <div>
+                <h3 style="letter-spacing:-1px">Any Suggestions?</h3>
+                    {{ form.suggestions }}
+                </h2>
+            </div>
+
+            <br>
+      <div class="field">
+        <p class="control">
+          <button type="submit" value="" class="button is-success">
+            Proceed
+          </button>
+        </p>
+      </div>
+    </form>
+		<!-- </center> -->
+	</div>
+
+</body>
+
+{% endblock %}

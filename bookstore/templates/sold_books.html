@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+
+
+
+<!--{% for post in category_posts %}
+
+<a href="{{ post.get_absolute_url }}">
+    <img src="{{ post.content.first.file.url }}" class="card-img-top" alt="..." style="height: 200px;width: 300px;align-self: center;"></a>
+
+{% endfor %}-->
+
+<div class="row row-cols-1 row-cols-md-4 g-4" style="margin: 10px; justify-content: center;">
+    {% for post_item in posts %}
+    <div class="col">
+      <div class="card" style="height:350px;width:300px;">
+        <a href="{{ post_item.get_absolute_url }}">
+        <img src="{{ post_item.content.first.file.url }}" class="card-img-top" alt="..." style="height: 200px;width: 300px;align-self: center;"></a>
+        <div class="card-body">
+          <h5 class="card-title">{{ post_item.title }}</h5>
+          <p class="card-text media-right">{{ post_item.cost }}</p>
+          <p class="card-text">{{ post_item.city }}-{{ post_item.state }}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    </div>
+
+{% endblock %}

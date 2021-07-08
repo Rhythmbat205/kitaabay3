@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+
+
+
+{% load static %}
+
+
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/post-form.css' %}">
+
+
+
+  {% block content %}
+  <body class="img" style="background-image: url('{% static "img/book_4.jpg" %}')";>
+<div class="card is-centered is-medium">
+    <div class="card-content is-medium">
+      <div class="content is-centered is-medium">
+   
+  
+  
+  <form>
+  <div class="control is-centered is-right is-medium">
+  <input class="input is-focused is-medium is-centered" name="q" type="text" placeholder="Search Books..." value="{{ request.GET.q }}">
+  <!--<input class="input is-large" name="q" type="text" placeholder="Search Jobs By Keywords..." value="{{ request.GET.q }}">-->
+  </div>
+  <div class="control is-centered">
+  <br><button type="submit" class="button is-success is-centered">Search</button>
+  </div>
+  </form>
+  </div>
+  
+  </div>
+  </div>
+
+
+   <div class="columns is-mobile">
+    <div class="column is-offset-one-fifth">
+  
+  
+  
+  
+  </div>
+  </div>
+  <!--<img align="right" src= "{% static 'img/search_user.png' %}" width="1000">-->
+  <!--<div class="column is-one-quarter">-->
+    
+
+
+
+{% for post in posts %}
+<div class="column is-half is-centered">
+    <div class="box is-centered">
+      {% if post.content.first.file.name|slice:"-3:" == 'jpg' or post.content.first.file.name|slice:"-3:" == 'png' %}
+      <figure class="image is-5by3">
+        <!--<a href="{{ post_item.get_absolute_url }}">-->
+          {% if not user.is_authenticated %}
+          <a href="{% url 'logout' %}">
+            {% else %}
+            <a href="{{ post.get_absolute_url }}">
+          {% endif %}
+          <img src="{{ post.content.first.file.url }}" alt="Placeholder image">
+        </a>
+      </figure>
+    {% else %}
+    <figure class="image is-10by10">
+      <a href="{{ post.get_absolute_url }}">
+        <video width="720" controls="controls" preload="metadata">
+
+          <source src="{{ post.content.first.file.url }}#t=0.5" type="video/mp4">        
+        </video>      
+      </a>
+    </figure>
+    {% endif %}
+    <div class="media-content">
+        {% if post.user.profile.first_name %}
+          <a href="{% url 'profile' post.user %}"><p class="title is-6">{{ post.user.profile.first_name }} {{ post.user.profile.last_name }}</p></a>
+        {% else %}
+          <a href="{% url 'profile' post.user %}"><p class="title is-6">Unknown</p></a>
+        {% endif %}
+
+        <p class="subtitle is-6">@{{ post.user.username }}</p>
+      </div>
+</div>
+</div>
+{% endfor %}
+	
+
+
+</body>
+
+{% endblock %}

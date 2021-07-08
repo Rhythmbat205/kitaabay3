@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'img/welcome_poster.jpg' %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'img/cover-page.jpg' %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'img/book9.jpg' %}" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<br>
+<div class="row row-cols-1 row-cols-md-4 g-4" style="margin: 10px; justify-content: center;">
+  {% for post_item in post_items %}
+  <div class="col">
+    <div class="card" style="height:350px;width:300px;">
+      <a href="{{ post_item.get_absolute_url }}">
+      <img src="{{ post_item.content.first.file.url }}" class="card-img-top" alt="..." style="height: 200px;width: 300px;align-self: center;"></a>
+      <div class="card-body">
+        <p class="card-title"><b>{{ post_item.title }}</b><small> - {{ post_item.category }}</small></p>
+        <p class="card-text">₹ {{ post_item.cost }}</p>
+        <p class="card-text">{{ post_item.city }}-{{ post_item.state }}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+  
+  
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ######################################################### OLD Home ###################################################################-->
+<!--<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Art Arena</title>
+    <link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link rel="icon" href="{% static 'img/Bechdo.JPG' %}">
+      
+  </head>
+  <body id="bg" style="background-image: url('static/img/background1.jpg')";>
+  <body>
+   
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="">
+      <img src="{% static 'img/Bechdo.JPG' %}" width="150" height="150">
+    </a>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+ 
+  
+  
+</div>
+</div>
+
+<div class="navbar-end">
+  <div class="navbar-item">
+    <div class="buttons">
+      {% if not user.is_authenticated %}
+      <a href="{% url 'signup' %}"class="button is-primary">
+        <strong>Sign up</strong>
+      </a>
+      <a href="{% url 'login' %}" class="button is-light">
+        Log in
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+</div>
+
+</nav>-->
+
+<!--<img src="{% static 'img/background1.jpg' %}" width="1000" height="1000">-->
+<!--<div class="field has-addons navbar-item is-centered" >
+  <form>
+    <div class="control is-centered">
+      <input class="input is-one-quarter" name="q" type="text" placeholder="Search users..." value="{{ request.GET.q }}">
+    </div>
+    <div class="control navbar-item">
+      <button type="submit" class="button is-success">Search</button>
+    </div>
+    </form>
+  </div>
+
+<div class="column is-one-quarter">
+
+{% for user in users %}
+<div class="box">
+  <article class="media">
+    <div class="media-left">
+      <figure class="image is-64x64">
+          {% if user.profile.picture %}
+            <img src="{{ user.profile.picture.url }}" alt="Placeholder image">
+          {% else %}
+            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+          {% endif %}
+      </figure>
+    </div>
+    <div class="media-content">
+      <div class="content">
+        <p>
+          <strong>{{ user.profile.first_name }} {{ user.profile.last_name }}</strong><small>@{{ user.username }}</small>
+        </p>
+        <a href="{% url 'newconversation' user.username %}" class="button is-info">Send a message!</a>
+      </div>
+    </div>
+  </article>
+</div>
+{% endfor %}
+	
+
+</div>
+
+
+      
+
+
+
+
+
+
+          
+         
+        </div>
+        
+        
+        </div>
+        
+          
+
+ 
+    </div>
+
+
+
+  </nav>
+
+
+<div class="columns is-mobile is-multiline is-centered">
+      
+
+  {% for post_item in post_items %}
+        <div class="column is-one-quarter">
+          <div class="box">
+            {% if post_item.content.first.file.name|slice:"-3:" == 'jpg' or post_item.content.first.file.name|slice:"-3:" == 'png' or post_item.content.first.file.name|slice:"-4:" == 'jpeg' %}
+            <figure class="image is-4by3">
+              <a href="{{ post_item.get_absolute_url }}">
+                {% if not user.is_authenticated %}
+                <a href="{% url 'logout' %}">
+                  {% else %}
+                  <a href="{{ post_item.get_absolute_url }}">
+                {% endif %}
+                <img src="{{ post_item.content.first.file.url }}" alt="Placeholder image">
+              </a>
+            </figure>
+          {% else %}
+          <figure class="image is-10by10">
+            <a href="{{ post_item.get_absolute_url }}">
+              <video width="720" controls="controls" preload="metadata">
+
+                <source src="{{ post_item.content.first.file.url }}#t=0.5" type="video/mp4">        
+              </video>      
+            </a>
+          </figure>
+          {% endif %}
+          <div class="media-content">
+            {% if post_item.user.profile.first_name %}
+              <a href="{% url 'profile' post_item.user %}"><p class="title is-6">{{ post_item.user.profile.first_name }} {{ post_item.user.profile.last_name }}</p></a>
+            {% else %}
+              <a href="{% url 'profile' post_item.user %}"><p class="title is-6">{{ post_item.user.username }}</p></a>
+            {% endif %}
+    
+            <p class="subtitle is-6">@{{ post_item.user.username }}</p>
+            <div class="media-content media-right">
+              <p>{{ post_item.state }}</p>
+            </div>
+            <div class="media-right">
+              <p>{{ post_item.cost }}</p>
+            </div>
+          </div>
+          </div>
+          
+          </div>
+          {% endfor %}
+          </div>
+-->

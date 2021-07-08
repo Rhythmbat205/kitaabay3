@@ -1,0 +1,34 @@
+.imge{
+	background-image: url(img/book5.jpg);
+	min-height: 800px;
+	/*height: 100%;*/
+	/*width: 100%;*/
+	background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    opacity: 0.8;
+}
+
+.text{
+	position: absolute;
+	background-color: white;
+	width: 30%;
+	top: 15%;
+	left: 25%;
+	text-align: center;
+	letter-spacing: 2px;
+	padding-top: 10px;
+	padding-bottom: 15px;
+	border: 3px solid black;
+	border-radius: 8px;
+}
+
+.input{
+	right: 0px;
+	border-radius: 5px;
+	padding: 5px;
+	margin-left: 30px;
+	width: 80%;
+	display: block;
+}

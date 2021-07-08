@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="columns is-mobile has-text-centered">
+  <div class="column is-half is-offset-one-quarter">
+
+    <div class="card">
+    <div class="card-content">
+
+    <form method="post" action="" enctype="multipart/form-data" role="form">
+    {% csrf_token %}
+    <h3 class="title is-1">New Job Post</h3>
+
+            <div class="field">
+              <p class="control has-icons-left">
+              <label class="label is-medium">Company Name</label>
+                {{ form.company_name }}
+                <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </p>
+          </div>
+
+            <div class="field">
+              <p class="control has-icons-left">
+              <label class="label is-medium">Job Title</label>
+                {{ form.job_title }}
+                <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </p>
+          </div>
+
+            <div class="field">
+              <p class="control has-icons-left">
+              <label class="label is-medium">Creative Skills</label>
+                {{ form.creative_skills }}
+                <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </p>
+        </div>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left">
+            <label class="label is-medium">Short Description</label>
+              {{ form.short_description }}
+              <span class="icon is-small is-left">
+          <i class="fas fa-lock"></i>
+        </span>
+      </p>
+        </div>
+        <div class="field">
+          <p class="control has-icons-left">
+          <label class="label is-medium">Full Description</label>
+            {{ form.full_description }}
+            <span class="icon is-small is-left">
+        <i class="fas fa-lock"></i>
+      </span>
+    </p>
+      </div>
+        <div class="field">
+            <p class="control has-icons-left">
+            <label class="label is-medium">URL</label>
+              {{ form.url }}
+              <span class="icon is-small is-left">
+          <i class="fas fa-lock"></i>
+        </span>
+      </p>
+        </div>
+        <div class="field">
+            <p class="control has-icons-left">
+            <label class="label is-medium">Job Type</label>
+              {{ form.job_type }}
+              <span class="icon is-small is-left">
+          <i class="fas fa-lock"></i>
+        </span>
+      </p>
+        </div>
+        <div class="field">
+          <p class="control has-icons-left">
+          <label class="label is-medium">country</label>
+            {{ form.country }}
+            <span class="icon is-small is-left">
+        <i class="fas fa-lock"></i>
+      </span>
+    </p>
+      </div>
+        <div class="field">
+          <p class="control has-icons-left">
+          <label class="label is-medium">City</label>
+            {{ form.city }}
+            <span class="icon is-small is-left">
+        <i class="fas fa-lock"></i>
+      </span>
+    </p>
+      </div>
+      
+    <div class="field">
+      <p class="control has-icons-left">
+      <label class="label is-medium">Onsite/Work From Home</label>
+        {{ form.onsite }}
+        <span class="icon is-small is-left">
+    <i class="fas fa-lock"></i>
+  </span>
+</p>
+  </div>
+  <div class="field">
+    <p class="control has-icons-left">
+    <label class="label is-medium">Softwares</label>
+      {{ form.softwares }}
+      <span class="icon is-small is-left">
+  <i class="fas fa-lock"></i>
+</span>
+</p>
+</div>
+
+      <div class="field">
+      <p class="control">
+        <button type="submit" name="action" class="button is-success">
+          Create
+        </button>
+      </p>
+    </div>
+
+
+      </div>
+</div>
+
+
+</div>
+</div>
+
+
+
+
+
+{% endblock %}

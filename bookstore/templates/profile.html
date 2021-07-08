@@ -1,0 +1,576 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!--!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style>
+<body class="w3-light-grey">
+
+ Page Container 
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+   The Grid 
+  <div class="w3-row-padding">
+  
+     Left Column 
+    <div class="w3-third">
+      <div class="box">
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-display-container">
+          {% if profile.picture %}
+          <img class="is-rounded is-medium" src="{{ profile.picture.url }}" width="250" height="250">
+        {% else %}
+          <img class="is-rounded is-256x256" src="https://bulma.io/images/placeholders/256x256.png">
+        {% endif %}
+       
+          <div class="w3-display-bottomleft w3-container w3-text-black">
+            
+            
+          </div>
+        </div>
+        
+        <h3 class="subtitle is-3">@{{ profile.user }}</h3>
+        <div class="media-content">
+
+          <div class="content">
+            <h2 style="font-weight: bold;" class="title is-1">{% if profile.first_name %}{{ profile.first_name }} {{ profile.last_name }} {% endif %}</h2>
+            <div class="box">
+              <nav class="level is-mobile">
+                <div class="level-item has-text-centered">
+                  <div>
+                    <p class="heading">Posts</p>
+                    <p class="title">{{ posts_count }}</p>
+                  </div>
+                </div>
+                <div class="level-item has-text-centered">
+                  <div>
+                    <p class="heading">Following</p>
+                    <p class="title">{{ following_count }}</p>
+                  </div>
+                </div>
+                <div class="level-item has-text-centered">
+                  <div>
+                    <p class="heading">Followers</p>
+                    <p class="title">{{ followers_count }}</p>
+                  </div>
+                </div>
+                <div class="level-item has-text-centered">
+                <div>
+                {% if user.is_authenticated and user == profile.user %}
+            <a href="{% url 'edit-profile' %}" class="button">Edit profile</a>
+          {% endif %}
+          </div>
+          </div>
+          <div>
+            {% if user.is_authenticated and user == profile.user %}
+            <li class="{% if url_name == 'profile' %}is-active{% endif %}">
+              <a href="{% url 'profile' profile.user %}"><i class="material-icons">dashboard</i>My Posts</a>
+            </li>
+            {% endif %}
+            {% if user.is_authenticated and user == profile.user %}
+              <li class="{% if url_name == 'profilefavorites' %}is-active{% endif %}">
+                <a href="{% url 'profilefavorites' profile.user %}"><i class="material-icons">save_alt</i>Saved</a>
+              </li>
+              {% endif %}
+          
+          </div>
+          
+              </nav>
+          
+            </div>
+          {% if user.is_authenticated and user != profile.user %}
+            <div class="media-right">
+              {% if follow_status == True %}
+                <a href="{% url 'follow' profile.user 0 %}" class="button is-danger">Unfollow</a>
+              {% else %}
+                <a href="{% url 'follow' profile.user 1 %}" class="button is-success">Follow</a>
+              {% endif  %}
+            </div>
+          {% endif %}
+            
+          </div>
+          </div>
+          <br>
+        <div class="w3-container">
+          <h1 style="font-weight: bold;" class="title is-1">{{ user.location }}</h1>
+          <h1 style="font-weight: bold;" class="title is-1">{{ profile.location }}</h1>
+          <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>{{ profile.occupation }}</p>
+          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>{{ profile.location }}</p>
+          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i><a href="{{ profile.url }}">{{ profile.url }}</a></p>
+          <hr>
+          <p class="w3-large w3-text-theme"><b><i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>About Me!</b></p>
+          <p>{{ profile.profile_info }}</p>
+          <hr>
+          
+          {% if profile.twitter_url or profile.instagram_url or profile.facebook_url or profile.youtube_url or profile.linkedin_url  %}
+          
+          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Social  Media</b></p>
+          {% if profile.twitter_url %}
+          <a href="{{ profile.twitter_url }}"><i class="fa fa-twitter w3-hover-opacity"> - {{ profile.twitter_url }}</i></a>
+          {% endif %}
+          <br>
+          {% if profile.instagram_url %}
+          <a href="{{ profile.instagram_url }}"><i class="fa fa-instagram w3-hover-opacity"> - {{ profile.instagram_url }}</i></a>
+          {% endif %}
+          <br>
+          {% if profile.youtube_url %}
+          <a href="{{ profile.youtube_url }}"><i class="fa fa-youtube w3-hover-opacity"> - {{ profile.youtube_url }}</i></a>
+          {% endif %}
+          <br>
+          {% if profile.linkedin_url %}
+          <a href="{{ profile.linkedin_url }}"><i class="fa fa-linkedin w3-hover-opacity"> - {{ profile.linkedin_url }}</i></a>
+          {% endif %}
+          <br>
+          {% if profile.facebook_url %}
+          <a href="{{ profile.facebook_url }}"><i class="fa fa-facebook-official w3-hover-opacity"> - {{ profile.facebook_url }}</i></a>
+          {% endif %}
+          <br>
+          
+          {% endif %}
+            
+        
+          
+          <br>
+        </div>
+      </div><br>-->
+
+    <!-- End Left Column -->
+    
+    
+    <!-- Right Column -->
+    <!--<div class="w3-twothird">
+    
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+        {% if url_name == 'profilefavorites' %}
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Saved</h2>
+        {% else %}
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>My Work</h2>
+        {% endif %}
+        <div class="w3-container">
+          
+          {% for post in posts %}
+<div class="column is-one-half">
+    <div class="box">
+  {% if post.content.first.file.name|slice:"-3:" == 'mp4' %}
+  <a href="{{ post.get_absolute_url }}">
+    <video width="1280" controls="controls" preload="metadata">
+      <source src="{{ post.content.first.file.url }}#t=0.5" type="video/mp4">        
+    </video>      
+  </a>
+  {% else %}
+  <figure class="image is-one-half">
+    <a href="{{ post.get_absolute_url }}">
+      <img src="{{ post.content.first.file.url }}" alt="Placeholder image">
+    </a>
+  </figure>
+  {% endif %}
+    </div>
+  </div>
+    
+    {% empty %}
+      <br>
+      <h3 class="title is-3">You do not have any post!</h3>
+    {% endfor %}
+          
+        </div>
+      </div>-->
+
+    
+
+    <!-- End Right Column -->
+    </div>
+    
+  <!-- End Grid -->
+  </div>
+  
+  <!-- End Page Container -->
+</div>
+
+<!--<footer class="w3-container w3-teal w3-center w3-margin-top">
+  <p>Find me on social media.</p>
+  <i class="fa fa-facebook-official w3-hover-opacity"></i>
+  <i class="fa fa-instagram w3-hover-opacity"></i>
+  <i class="fa fa-snapchat w3-hover-opacity"></i>
+  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+  <i class="fa fa-twitter w3-hover-opacity"></i>
+  <i class="fa fa-linkedin w3-hover-opacity"></i>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>-->
+
+</body>
+</html>
+
+
+
+<!--<article class="media">
+
+  <div class="media-left">
+      <figure class="image is-256x256">
+        {% if profile.picture %}
+          <img class="is-4by3" src="{{ profile.picture.url }}">
+        {% else %}
+          <img class="is-4by3" src="https://bulma.io/images/placeholders/256x256.png">
+        {% endif %}
+      </figure>
+  </div>
+
+   <div class="media-content">
+
+    <div class="content">
+      <h1 style="font-weight: bold;" class="title is-1">{% if profile.first_name %}{{ profile.first_name }} {{ profile.last_name }} {% endif %}</h1>
+      <h2 class="subtitle is-3">@{{ profile.user }}</h2>
+
+    {% if user.is_authenticated and user != profile.user %}
+      <div class="media-right">
+        {% if follow_status == True %}
+          <a href="{% url 'follow' profile.user 0 %}" class="button is-danger">Unfollow</a>
+        {% else %}
+          <a href="{% url 'follow' profile.user 1 %}" class="button is-success">Follow</a>
+        {% endif  %}
+      </div>
+    {% endif %}
+
+    </div>
+
+    <h1 style="font-weight: bold;" class="title is-1">{{ user.location }}</h1>
+    <h1 style="font-weight: bold;" class="title is-1">{{ profile.location }}</h1>
+
+
+
+     <nav class="level is-mobile">
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Posts</p>
+      <p class="title">{{ posts_count }}</p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Following</p>
+      <p class="title">{{ following_count }}</p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Followers</p>
+      <p class="title">{{ followers_count }}</p>
+    </div>
+  </div>
+</nav>
+
+<p class="subtitle is-5">{% if profile.profile_info %}{{ profile.profile_info }}{% endif %}</p>
+
+{% if user.is_authenticated and user == profile.user %}
+  <a href="{% url 'edit-profile' %}" class="button">Edit profile</a>
+{% endif %}
+
+ </div>
+
+</article>
+
+
+</div>
+</div>
+
+
+
+    </div>
+  </section>
+
+
+
+  <section class="section">
+    <div class="container">
+
+  <div class="tabs is-centered">
+  <ul>
+    <li class="{% if url_name == 'profile' %}is-active{% endif %}">
+      <a href="{% url 'profile' profile.user %}"><i class="material-icons">dashboard</i>Posts</a>
+    </li>
+    {% if user.is_authenticated and user == profile.user %}
+    <li class="{% if url_name == 'profilefavorites' %}is-active{% endif %}">
+      <a href="{% url 'profilefavorites' profile.user %}"><i class="material-icons">save_alt</i>Saved</a>
+    </li>
+    {% endif %}
+  </ul>
+</div>
+
+
+    <div class="columns is-mobile is-multiline is-centered">-->
+      
+    
+  <!--{% if post.content.first.file.name|slice:"-3:" == 'jpg' or post_item.content.first.file.name|slice:"-3:" == 'png' %}
+    <figure class="image is-4by3">
+      <a href="{{ post.get_absolute_url }}">
+        <img src="{{ post.content.first.file.url }}" alt="Placeholder image">
+      </a>
+    </figure>
+  {% else %}
+    <a href="{{ post.get_absolute_url }}">
+      <video width="640" controls="controls" preload="metadata">
+        <source src="{{ post.content.first.file.url }}#t=0.5" type="video/mp4">        
+      </video>      
+    </a>
+  {% endif %}-->
+  
+  
+  <!--{% for post in posts %}
+  <div class="column is-one-quarter">
+    <div class="box">
+  {% if post.content.first.file.name|slice:"-3:" == 'mp4' %}
+  <a href="{{ post.get_absolute_url }}">
+    <video width="640" controls="controls" preload="metadata">
+      <source src="{{ post.content.first.file.url }}#t=0.5" type="video/mp4">        
+    </video>      
+  </a>
+  {% else %}
+  <figure class="image is-4by3">
+    <a href="{{ post.get_absolute_url }}">
+      <img src="{{ post.content.first.file.url }}" alt="Placeholder image">
+    </a>
+  </figure>
+  {% endif %}
+    </div>
+      </div>
+    {% empty %}
+      <br>
+      <h3 class="title is-3">You do not have any post!</h3>
+    {% endfor %}
+
+
+
+      </div>
+
+</div>
+</div>
+
+
+
+    </div>
+  </section>-->
+
+
+
+<!--mew code-->
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style>
+<body class="w3-light-grey">
+
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+  
+    <!-- Left Column -->
+    <div class="w3-third">
+    
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-display-container">
+          
+          <img class="is-rounded" src="{% static 'img/profile.jpg' %}">
+        
+       
+          <div class="w3-display-bottomleft w3-container w3-text-black">
+            
+            
+          </div>
+        </div>
+   
+        <h3 class="subtitle is-3">@{{ profile.user }}</h3>
+        <div class="media-content">
+
+          <div class="content">
+            <h2 style="font-weight: bold;" class="title is-1">{% if profile.first_name %}{{ profile.first_name }} {{ profile.last_name }} {% endif %}</h2>
+
+          {% if user.is_authenticated and user != profile.user %}
+            <div class="media-right">
+              {% if follow_status == True %}
+                <a href="{% url 'follow' profile.user 0 %}" class="button is-danger">Unfollow</a>
+              {% else %}
+                <a href="{% url 'follow' profile.user 1 %}" class="button is-success">Follow</a>
+              {% endif  %}
+            </div>
+          {% endif %}
+            
+          </div>
+          </div>
+          <br>
+        <div class="w3-container">
+          <!--<h1 style="font-weight: bold;" class="title is-1">{{ user.location }}</h1>
+          <h1 style="font-weight: bold;" class="title is-1">{{ profile.location }}</h1>-->
+         
+          <hr>
+          <p class="w3-large w3-text-theme"><b><i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>About Me!</b></p>
+          <p>{{ profile.profile_info }}</p>
+          <hr>
+          {% if user.is_authenticated and user == profile.user %}
+          <li class="{% if url_name == 'soldbooks' %}is-active{% endif %}">
+            <a href="{% url 'soldbooks' profile.user %}">Your Sold Section</a>
+          </li>
+          {% endif %}
+          {% if profile.twitter_url or profile.instagram_url or profile.facebook_url or profile.youtube_url or profile.linkedin_url  %}
+          
+          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Social  Media</b></p>
+          {% if profile.twitter_url %}
+          <a href="{{ profile.twitter_url }}"><i class="fa fa-twitter w3-hover-opacity"> - {{ profile.twitter_url }}</i></a>
+          {% endif %}
+          <br>
+          {% if profile.instagram_url %}
+          <a href="{{ profile.instagram_url }}"><i class="fa fa-instagram w3-hover-opacity"> - {{ profile.instagram_url }}</i></a>
+          {% endif %}
+          <br>
+          {% if profile.youtube_url %}
+          <a href="{{ profile.youtube_url }}"><i class="fa fa-youtube w3-hover-opacity"> - {{ profile.youtube_url }}</i></a>
+          {% endif %}
+          <br>
+          {% if profile.linkedin_url %}
+          <a href="{{ profile.linkedin_url }}"><i class="fa fa-linkedin w3-hover-opacity"> - {{ profile.linkedin_url }}</i></a>
+          {% endif %}
+          <br>
+          {% if profile.facebook_url %}
+          <a href="{{ profile.facebook_url }}"><i class="fa fa-facebook-official w3-hover-opacity"> - {{ profile.facebook_url }}</i></a>
+          {% endif %}
+          <br>
+          
+          {% endif %}
+            
+        
+          
+          <br>
+        </div>
+      </div><br>
+
+    <!-- End Left Column -->
+    </div>
+    <div class="box">
+    <nav class="level is-mobile">
+      <div class="level-item has-text-centered">
+        <div>
+          <p class="heading">Posts</p>
+          <p class="title">{{ posts_count }}</p>
+        </div>
+      </div>
+      <div class="level-item has-text-centered">
+        <div>
+          <p class="heading">Following</p>
+          <p class="title">{{ following_count }}</p>
+        </div>
+      </div>
+      <div class="level-item has-text-centered">
+        <div>
+          <p class="heading">Followers</p>
+          <p class="title">{{ followers_count }}</p>
+        </div>
+      </div>
+      <div class="level-item has-text-centered">
+      <div>
+      {% if user.is_authenticated and user == profile.user %}
+  <a href="{% url 'edit-profile' %}" class="button">Edit profile</a>
+{% endif %}
+</div>
+</div>
+<div>
+  {% if user.is_authenticated and user == profile.user %}
+  <li class="{% if url_name == 'profile' %}is-active{% endif %}">
+    <a href="{% url 'profile' profile.user %}"><i class="material-icons">dashboard</i>My Posts</a>
+  </li>
+  {% endif %}
+  {% if user.is_authenticated and user == profile.user %}
+    <li class="{% if url_name == 'profilefavorites' %}is-active{% endif %}">
+      <a href="{% url 'profilefavorites' profile.user %}"><i class="material-icons">shopping_cart</i>My Cart</a>
+    </li>
+    {% endif %}
+
+</div>
+
+    </nav>
+
+  </div>
+    <!-- Right Column -->
+    <div class="w3-twothird">
+    
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+        {% if url_name == 'profilefavorites' %}
+        <h2 class="w3-text-grey w3-padding-16"><i class="material-icons">shopping_cart</i>Cart</h2>
+        {% else %}
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>My Posts</h2>
+        {% endif %}
+        <!--<div class="w3-container">-->
+          
+          {% for post in posts %}
+<div class="column is-one-half">
+    <div class="box">
+  {% if post.content.first.file.name|slice:"-3:" == 'mp4' %}
+  <a href="{{ post.get_absolute_url }}">
+    <video width="1280" controls="controls" preload="metadata">
+      <source src="{{ post.content.first.file.url }}#t=0.5" type="video/mp4">        
+    </video>      
+  </a>
+  {% else %}
+  <figure class="image is-one-half">
+    <a href="{{ post.get_absolute_url }}">
+      <img src="{{ post.content.first.file.url }}" alt="Placeholder image">
+    </a>
+  </figure>
+  {% endif %}
+    </div>
+  </div>
+    
+    {% empty %}
+      <br>
+      <h3 class="title is-3">You do not have any post!</h3>
+    {% endfor %}
+          
+        </div>
+      </div>
+
+    
+
+    <!-- End Right Column -->
+    </div>
+    
+  <!-- End Grid -->
+  </div>
+  
+  <!-- End Page Container -->
+</div>
+
+<!--<footer class="w3-container w3-teal w3-center w3-margin-top">
+  <p>Find me on social media.</p>
+  <i class="fa fa-facebook-official w3-hover-opacity"></i>
+  <i class="fa fa-instagram w3-hover-opacity"></i>
+  <i class="fa fa-snapchat w3-hover-opacity"></i>
+  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+  <i class="fa fa-twitter w3-hover-opacity"></i>
+  <i class="fa fa-linkedin w3-hover-opacity"></i>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>-->
+
+</body>
+</html>
+
+{% endblock %}
