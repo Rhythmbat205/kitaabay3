@@ -80,17 +80,19 @@
   
             
           </li>
+	   {% if user.is_authenticated %}
           <div class="navbar-item has-dropdown is-hoverable" style="color: rgb(149, 199, 199);">
             <a class="navbar-link" style="color: rgb(149, 199, 199);">
               Settings
             </a>
             <div class="navbar-dropdown">
-            <a href="{% url 'logout' %}" class="navbar-item" style="color:black">
+            <a href="{% url 'logout' %}" class="navbar-item" style="color: rgb(149, 199, 199);">
               
               Log out
             </a>
           </div>
         </div>
+	{% endif %}		      
         <!--<li>
           {% if user.is_authenticated and user == profile.user %}
         <li class="{% if url_name == 'profilefavorites' %}is-active{% endif %} navbar-item">
