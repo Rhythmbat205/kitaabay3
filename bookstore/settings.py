@@ -25,7 +25,7 @@ SECRET_KEY = 'vua*dvzq8g99u#!8&&1$r7cka=#eyo#urirv)ofdob-c6y8sia'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['kitaaabay.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['kitaaabay.herokuapp.com','127.0.0.1','kitaabay.herokuapp.com']
 
 
 # Application definition
