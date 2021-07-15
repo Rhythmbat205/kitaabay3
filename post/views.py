@@ -126,7 +126,7 @@ def NewPost(request):
 
 def category(request, category_slug):
 	category = get_object_or_404(Category, slug=category_slug)
-	posts = Post.objects.filter(category=category).order_by('-posted')
+	posts = Post.objects.filter(category=category, status=False).order_by('-posted')
 
 	template = loader.get_template('categories.html')
 
