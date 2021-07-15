@@ -68,7 +68,7 @@ def exploreposts(request):
 	context = {}
 	
 	if query:
-		posts = Post.objects.filter(Q(caption__icontains=query))
+		posts = Post.objects.filter(Q(caption__icontains=query), status=False)
 		users= User.objects.filter(post=posts)
 		profile = Profile.objects.filter(user=users)
 		#Pagination
