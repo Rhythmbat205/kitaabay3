@@ -190,7 +190,7 @@ def explorebooks(request):
 	if query:
 		posts = Post.objects.filter(Q(caption__icontains=query)|
 									Q(title__icontains=query)|
-									Q(category__icontains=query))
+									Q(category__icontains=query),status=False)
 		users= User.objects.filter(post=posts)
 		profile = Profile.objects.filter(user=users)
 		#Pagination
@@ -210,7 +210,7 @@ def explorebooks(request):
 
 
 def CategoryView(request, cats):
-	category_posts = Post.objects.filter(category=cats.replace('-',' '))
+	category_posts = Post.objects.filter(category=cats.replace('-',' '),status=False)
 	return render(request, 'categories.html', {'category_posts':category_posts})
 
 	
